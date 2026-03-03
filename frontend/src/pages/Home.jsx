@@ -141,20 +141,26 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap gap-8 justify-center mt-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 mt-12 px-4 w-full">
+          {/* --- 1. GET RESUME BUTTON (RE-ENGINEERED) --- */}
           <motion.a
             href="/resume-shakti.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Shakti-Sahu-Resume.pdf"
             whileHover={{ y: -5, scale: 1.05 }}
-            className="px-10 py-4 bg-cyan-500 text-black font-black text-xl rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-cyan-500/60 transition-all flex items-center gap-3"
+            whileTap={{ scale: 0.95 }}
+            className="w-full sm:w-auto px-8 md:px-10 py-4 bg-cyan-500 text-black font-black text-lg md:text-xl rounded-2xl md:rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-cyan-500/60 transition-all flex items-center justify-center gap-3 active:bg-white"
           >
             Get Resume <FaRocket />
           </motion.a>
 
+          {/* --- 2. PORTFOLIO CV BUTTON (MOBILE OPTIMIZED) --- */}
           <motion.button
             whileHover={{ y: -5, scale: 1.05 }}
-            className="px-10 py-4 bg-transparent border-2 border-white/20 hover:border-white text-white font-bold text-xl rounded-full transition-all"
-            onClick={() => alert("CV coming soon!")}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => alert("CV is not available, wait for some days")}
+            className="w-full sm:w-auto px-8 md:px-10 py-4 bg-transparent border-2 border-white/20 hover:border-cyan-500 hover:text-cyan-500 text-white font-bold text-lg md:text-xl rounded-2xl md:rounded-full transition-all flex items-center justify-center shadow-lg"
           >
             Portfolio CV
           </motion.button>
