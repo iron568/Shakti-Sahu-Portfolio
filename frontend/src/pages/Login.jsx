@@ -151,11 +151,11 @@ export default function Login() {
   const validateForm = () => {
     const newErrors = { email: "", password: "" };
     if (!formData.email) newErrors.email = "Access ID required";
-    else if (formData.email !== "admin@shakti.com")
+    else if (formData.email !== "thanos568@gmail.com")
       newErrors.email = "Unauthorized Identity";
 
     if (!formData.password) newErrors.password = "Security Key required";
-    else if (formData.password !== "shakti123")
+    else if (formData.password !== "ironman928")
       newErrors.password = "Access Denied";
 
     setErrors(newErrors);
