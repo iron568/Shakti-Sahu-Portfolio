@@ -32,7 +32,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    // Ye line Render ke MONGODB_URI variable ko use karegi
+    // Ye line Render ke MONGODB_URI variable se link uthayegi
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("MongoDB Connected Successfully ✅");
   } catch (error) {
