@@ -14,7 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://shakti-sahu-portfolio.vercel.app", // Tumhari live site ki link
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
