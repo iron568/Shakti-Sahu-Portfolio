@@ -209,15 +209,17 @@ export default function Contact() {
     setStatus("sending");
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/contact",
+        "https://shakti-sahu-portfolio.onrender.com/api/contact", // Path (/api/contact) add kar diya hai
         formData,
       );
-      if (response.data.success) {
+      if (response.status === 201 || response.data.success) {
+        // Status 201 check karna safer hai
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
         setTimeout(() => setStatus(""), 3000);
       }
     } catch (error) {
+      console.error("Submission Error:", error); // Error check karne ke liye console log
       setStatus("error");
       setTimeout(() => setStatus(""), 3000);
     }

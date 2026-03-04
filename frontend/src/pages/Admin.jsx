@@ -181,15 +181,22 @@ export default function Admin() {
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5001/api/contact");
-      setContacts(response.data.data || []);
+      const response = await axios.get(
+        "https://shakti-sahu-portfolio.onrender.com/api/contact",
+      );
+
+      // Agar backend direct array bhej raha hai toh 'response.data' use karein
+      // Agar backend { data: [] } bhej raha hai toh niche wala sahi hai
+      const data = Array.isArray(response.data)
+        ? response.data
+        : response.data.data || [];
+      setContacts(data);
     } catch (error) {
       console.error("Error fetching contacts:", error);
     } finally {
       setTimeout(() => setLoading(false), 800);
     }
   };
-
   // 1. SOFT DELETE (Move to Trash)
   const moveToTrash = (contact) => {
     setTrash([...trash, contact]);
