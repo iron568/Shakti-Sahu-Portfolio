@@ -242,7 +242,7 @@ export default function Login() {
                       ? "border-red-500 bg-red-500/5"
                       : "border-white/10 focus:border-cyan-500"
                   }`}
-                  placeholder="admin@shakti.com"
+                  placeholder="Enter email"
                   disabled={loading}
                 />
                 <AnimatePresence>
@@ -275,7 +275,7 @@ export default function Login() {
                       ? "border-red-500 bg-red-500/5"
                       : "border-white/10 focus:border-cyan-500"
                   }`}
-                  placeholder="••••••••"
+                  placeholder="Enter password"
                   disabled={loading}
                 />
                 <AnimatePresence>

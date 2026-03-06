@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password) => {
     // Email: admin@shakti.com | Password: shakti123
-    if (email === "admin@shakti.com" && password === "shakti123") {
+    if (email === "thanos568@gmail.com" && password === "ironman928") {
       setIsLoggedIn(true);
       return true;
     }
