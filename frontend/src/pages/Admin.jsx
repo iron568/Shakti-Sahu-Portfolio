@@ -309,7 +309,7 @@ export default function Admin() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, x: view === "active" ? 50 : -50 }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[2rem] grid md:grid-cols-[1fr_1.5fr_2fr_1fr] items-center gap-6 group hover:border-white/30 transition-all"
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[2rem] grid md:grid-cols-[1fr_1.2fr_1.2fr_1.5fr_0.8fr] items-center gap-6 group hover:border-white/30 transition-all"
                 >
                   <div className="flex flex-col">
                     <span className="text-[10px] font-black text-white/30 uppercase">
@@ -324,6 +324,15 @@ export default function Admin() {
                     </span>
                     <span className="text-cyan-400 font-mono text-xs truncate">
                       {contact.email}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-black text-white/30 uppercase">
+                      Mobile
+                    </span>
+                    <span className="text-cyan-400 font-mono text-xs">
+                      {contact.phone}
                     </span>
                   </div>
 

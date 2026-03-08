@@ -200,6 +200,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
   const [status, setStatus] = useState("");
@@ -215,7 +216,7 @@ export default function Contact() {
       if (response.status === 201 || response.data.success) {
         // Status 201 check karna safer hai
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", message: "" });
         setTimeout(() => setStatus(""), 3000);
       }
     } catch (error) {
@@ -291,9 +292,9 @@ export default function Contact() {
                 target="_blank"
                 className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-2xl transition-all hover:border-white/40"
                 whileHover={{
-                  y: -8,
-                  scale: 1.1,
-                  backgroundColor: `${social.color}20`,
+                  y: -18,
+                  scale: 1.2,
+                  backgroundColor: `${social.color}50`,
                   color: social.color,
                 }}
                 whileTap={{ scale: 0.9 }}
@@ -333,6 +334,18 @@ export default function Contact() {
                 onChange={handleChange}
                 className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-white/20"
                 required
+              />
+            </div>
+
+            <div>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="YOUR MOBILE NUMBER"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none  focus:border-cyan-500 transition-all placeholder:text-white/20"
               />
             </div>
 

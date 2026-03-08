@@ -6,9 +6,9 @@ const router = express.Router();
 // POST - Contact form (Page 115)
 router.post("/", async (req, res) => {
   try {
-    const { name, email, message } = req.body;
-    console.log("📨 New message:", { name, email }); // Page 132
-    const contact = await Contact.create({ name, email, message });
+    const { name, email, phone, message } = req.body;
+    console.log("📨 New message:", { name, email, phone }); // Page 132
+    const contact = await Contact.create({ name, email, phone, message });
     res.status(201).json({ success: true, data: contact });
   } catch (error) {
     console.error("Contact Error:", error);
