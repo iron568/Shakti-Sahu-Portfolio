@@ -1,5 +1,6 @@
 import express from "express";
 import Contact from "../models/Contact.js";
+import Visitor from "../models/Visitor.js";
 
 const router = express.Router();
 
@@ -32,6 +33,23 @@ router.delete("/:id", async (req, res) => {
     await Contact.findByIdAndDelete(req.params.id);
     console.log("🗑️ Message deleted:", req.params.id);
     res.json({ success: true, message: "Contact deleted" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// GET - Analytics for Admin Dashboard
+router.get("/analytics", async (req, res) => {
+  try {
+    const totalVisitors = await Visitor.countDocuments();
+    const mobileUsers = await Visitor.countDocuments({ device: "Mobile" });
+    const desktopUsers = await Visitor.countDocuments({ device: "Desktop" });
+
+    res.json({
+      success: true,
+      totalVisitors,
+      deviceStats: { mobileUsers, desktopUsers },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -1,134 +1,3 @@
-// import SmartBackButton from "../components/SmartBackButton";
-// import { useState } from "react";
-// import { motion } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
-// import AnimatedBackground from "../components/AnimatedBackground";
-
-// export default function Login() {
-//   const [formData, setFormData] = useState({ email: "", password: "" });
-//   const [errors, setErrors] = useState({ email: "", password: "" });
-//   const [loading, setLoading] = useState(false);
-//   const { login } = useAuth();
-//   const navigate = useNavigate();
-
-//   const validateForm = () => {
-//     const newErrors = { email: "", password: "" };
-
-//     if (!formData.email) newErrors.email = "Email is required";
-//     else if (formData.email !== "admin@shakti.com")
-//       newErrors.email = "Wrong email";
-
-//     if (!formData.password) newErrors.password = "Password is required";
-//     else if (formData.password !== "shakti123")
-//       newErrors.password = "Wrong password";
-
-//     setErrors(newErrors);
-//     return Object.values(newErrors).every((error) => !error);
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setErrors({ email: "", password: "" });
-
-//     if (!validateForm()) {
-//       setLoading(false);
-//       return;
-//     }
-
-//     const success = login(formData.email, formData.password);
-
-//     setTimeout(() => {
-//       setLoading(false);
-//       if (success) {
-//         navigate("/admin");
-//       }
-//     }, 1200);
-//   };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//     if (errors[name]) setErrors({ ...errors, [name]: "" });
-//   };
-
-//   return (
-//     <div className="section-container">
-//       <AnimatedBackground />
-//       <motion.div
-//         className="glass-card p-12 w-full max-w-md shadow-2xl z-10"
-//         initial={{ opacity: 0, scale: 0.8 }}
-//         animate={{ opacity: 1, scale: 1 }}
-//         transition={{ duration: 0.6 }}
-//       >
-//         <div className="text-center mb-8">
-//           <h2 className="text-4xl font-bold text-white mb-4">🔐 Admin Login</h2>
-//           <p className="text-gray-400">Enter your credentials</p>
-//         </div>
-
-//         <form onSubmit={handleSubmit} className="space-y-6">
-//           <div>
-//             <label className="block text-sm font-medium text-gray-300 mb-2">
-//               Enter your email
-//             </label>
-//             <input
-//               type="email"
-//               name="email"
-//               placeholder="Enter your email"
-//               value={formData.email}
-//               onChange={handleChange}
-//               className={`input-field w-full ${errors.email ? "border-red-500 focus:border-red-400" : ""}`}
-//               autoComplete="off"
-//               disabled={loading}
-//               required
-//             />
-//             {errors.email && (
-//               <p className="text-red-400 text-xs mt-1">{errors.email}</p>
-//             )}
-//           </div>
-
-//           <div>
-//             <label className="block text-sm font-medium text-gray-300 mb-2">
-//               Enter your password
-//             </label>
-//             <input
-//               type="password"
-//               name="password"
-//               placeholder="Enter your password"
-//               value={formData.password}
-//               onChange={handleChange}
-//               className={`input-field w-full ${errors.password ? "border-red-500 focus:border-red-400" : ""}`}
-//               autoComplete="new-password"
-//               disabled={loading}
-//               required
-//             />
-//             {errors.password && (
-//               <p className="text-red-400 text-xs mt-1">{errors.password}</p>
-//             )}
-//           </div>
-
-//           <motion.button
-//             type="submit"
-//             className="w-full btn-primary"
-//             disabled={loading}
-//             whileHover={{ scale: 1.02 }}
-//             whileTap={{ scale: 0.98 }}
-//           >
-//             {loading ? "🔄 Verifying..." : "🚀 Login"}
-//           </motion.button>
-//         </form>
-
-//         <div className="text-xs text-gray-400 text-center mt-6">
-//           Need help? Contact administrator
-//         </div>
-//       </motion.div>
-//       <SmartBackButton />
-//     </div>
-//   );
-// }
-
-import SmartBackButton from "../components/SmartBackButton";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -138,6 +7,8 @@ import {
   FaUserShield,
   FaArrowLeft,
   FaExclamationTriangle,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 import AnimatedBackground from "../components/AnimatedBackground";
 
@@ -145,6 +16,7 @@ export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -260,36 +132,42 @@ export default function Login() {
             </div>
 
             {/* Password Field */}
-            <div className="space-y-2">
-              <label className="text-xs font-black tracking-[0.2em] text-white/40 ml-1">
-                SECURITY KEY
-              </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`w-full bg-white/5 border-b-2 py-4 px-4 text-white focus:outline-none transition-all ${
-                    errors.password
-                      ? "border-red-500 bg-red-500/5"
-                      : "border-white/10 focus:border-cyan-500"
-                  }`}
-                  placeholder="Enter password"
-                  disabled={loading}
-                />
-                <AnimatePresence>
-                  {errors.password && (
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-red-400 text-[10px] font-bold mt-1 flex items-center gap-1"
-                    >
-                      <FaExclamationTriangle /> {errors.password}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
+            <div className="relative">
+              <input
+                // Look yahan same rahega, bas 'type' toggle hoga
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`w-full bg-white/5 border-b-2 py-4 px-4 pr-12 text-white focus:outline-none transition-all ${
+                  errors.password
+                    ? "border-red-500 bg-red-500/5"
+                    : "border-white/10 focus:border-cyan-500"
+                }`}
+                placeholder="Enter password"
+                disabled={loading}
+              />
+
+              {/* --- YE HAI NAYA EYE BUTTON (Design vesa hi rahega) --- */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-cyan-500 transition-colors z-20"
+              >
+                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              </button>
+
+              <AnimatePresence>
+                {errors.password && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-red-400 text-[10px] font-bold mt-1 flex items-center gap-1"
+                  >
+                    <FaExclamationTriangle /> {errors.password}
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
 
             <motion.button
