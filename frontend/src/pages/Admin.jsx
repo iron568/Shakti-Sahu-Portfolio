@@ -436,9 +436,9 @@ export default function Admin() {
             <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">
               Desktop Access
             </span>
-            <FaDesktop className="text-white/20 group-hover:text-white/50 transition-colors" />
+            <FaDesktop className="text-cyan-400/50 group-hover:text-cyan-400 transition-colors" />
           </div>
-          <h3 className="text-4xl font-black text-white mt-1">
+          <h3 className="text-4xl font-black text-cyan-400 ">
             {stats.deviceStats.desktopUsers}
           </h3>
           <p className="text-[10px] text-gray-500 mt-2 font-mono tracking-tighter italic">
