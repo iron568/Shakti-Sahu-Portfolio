@@ -69,7 +69,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "sahushakti928@gmail.com", // Aapka Gmail
-    pass: "YOUR_APP_PASSWORD_HERE", // Wo 16-digit code yahan dalein
+    pass: "tfwjehvgdehtoxpy", // Wo 16-digit code yahan dalein
   },
 });
 
