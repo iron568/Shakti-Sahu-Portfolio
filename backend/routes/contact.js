@@ -113,16 +113,20 @@ dotenv.config();
 const router = express.Router();
 
 // --- RENDER COMPATIBLE TRANSPORTER ---
+// backend/routes/contact.js
+
 const transporter = nodemailer.createTransport({
-  service: "gmail", // Port aur Host ki jagah direct service use karein
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // Port 587 ke liye ye hamesha false rahega
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  // Timeout settings taaki connection jaldi band na ho
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+  tls: {
+    // Ye line Render ke security filters ko bypass karne mein help karti hai
+    rejectUnauthorized: false,
+  },
 });
 
 router.post("/", async (req, res) => {
