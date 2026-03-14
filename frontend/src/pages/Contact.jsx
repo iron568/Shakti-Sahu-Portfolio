@@ -1,186 +1,3 @@
-// import SmartBackButton from "../components/SmartBackButton";
-// import { useState } from "react";
-// import { motion } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
-// import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-// import axios from "axios";
-// import AnimatedBackground from "../components/AnimatedBackground";
-
-// export default function Contact() {
-//   const navigate = useNavigate();
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
-//   const [status, setStatus] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setStatus("sending");
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:5001/api/contact",
-//         formData,
-//       );
-//       if (response.data.success) {
-//         setStatus("success");
-//         setFormData({ name: "", email: "", message: "" });
-//         setTimeout(() => setStatus(""), 3000);
-//       }
-//     } catch (error) {
-//       setStatus("error");
-//       setTimeout(() => setStatus(""), 3000);
-//     }
-//   };
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   return (
-//     <div className="section-container">
-//       <AnimatedBackground />
-
-//       <motion.div
-//         className="glass-card p-12 w-full max-w-lg shadow-2xl z-10"
-//         initial={{ opacity: 0, scale: 0.8 }}
-//         animate={{ opacity: 1, scale: 1 }}
-//         transition={{ duration: 0.6 }}
-//       >
-//         <h2 className="text-4xl font-bold text-white mb-8 text-center">
-//           Contact
-//         </h2>
-
-//         <form onSubmit={handleSubmit} className="space-y-5 mb-8">
-//           <input
-//             type="text"
-//             name="name"
-//             placeholder="Name"
-//             value={formData.name}
-//             onChange={handleChange}
-//             className="input-field"
-//             required
-//           />
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="Email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className="input-field"
-//             required
-//           />
-//           <textarea
-//             name="message"
-//             placeholder="Message"
-//             value={formData.message}
-//             onChange={handleChange}
-//             className="input-field resize-none"
-//             rows="4"
-//             required
-//           />
-
-//           <motion.button
-//             type="submit"
-//             className={`w-full btn-primary ${
-//               status === "success"
-//                 ? "!bg-green-500"
-//                 : status === "error"
-//                   ? "!bg-red-500"
-//                   : ""
-//             }`}
-//             whileHover={{ scale: 1.02 }}
-//             whileTap={{ scale: 0.98 }}
-//             disabled={status === "sending"}
-//           >
-//             {status === "sending"
-//               ? "Sending..."
-//               : status === "success"
-//                 ? "Sent Successfully!"
-//                 : status === "error"
-//                   ? "Error! Try Again"
-//                   : "Send Message"}
-//           </motion.button>
-//         </form>
-
-//         {/* SOCIAL LINKS - Facebook → Instagram → LinkedIn → GitHub */}
-//         <div className="social-links flex justify-center items-center gap-6 mt-8">
-//           {/* FACEBOOK - Official Blue #1877F2 */}
-//           <motion.a
-//             href="https://www.facebook.com/shakti.sahu.581730"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="social-icon w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 backdrop-blur-sm rounded-xl flex items-center justify-center border border-blue-400/30 transition-all duration-300"
-//             style={{ backgroundColor: "#1877F2" }}
-//             whileHover={{
-//               scale: 1.2,
-//               y: -5,
-//               boxShadow: "0 10px 25px rgba(24,119,242,0.5)",
-//             }}
-//             whileTap={{ scale: 0.95 }}
-//           >
-//             <FaFacebook className="text-xl text-white" />
-//           </motion.a>
-
-//           {/* INSTAGRAM - Pink-Purple Gradient */}
-//           <motion.a
-//             href="https://www.instagram.com/shakti.sahu.581730/?next="
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="social-icon w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 backdrop-blur-sm rounded-xl flex items-center justify-center transition-all duration-300"
-//             whileHover={{
-//               scale: 1.2,
-//               y: -5,
-//               boxShadow: "0 10px 25px rgba(236,72,153,0.5)",
-//             }}
-//             whileTap={{ scale: 0.95 }}
-//           >
-//             <FaInstagram className="text-xl text-white" />
-//           </motion.a>
-
-//           {/* LINKEDIN - Official Blue */}
-//           <motion.a
-//             href="[www.linkedin.com/in/shakti-sahu-507321374](https://www.linkedin.com/in/shakti-sahu-507321374/)"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="social-icon w-12 h-12 bg-blue-700 hover:bg-blue-800 backdrop-blur-sm rounded-xl flex items-center justify-center border border-blue-400/30 transition-all duration-300"
-//             whileHover={{
-//               scale: 1.2,
-//               y: -5,
-//               boxShadow: "0 10px 25px rgba(59,130,246,0.5)",
-//             }}
-//             whileTap={{ scale: 0.95 }}
-//           >
-//             <FaLinkedin className="text-xl text-white" />
-//           </motion.a>
-
-//           {/* GITHUB - Official Black */}
-//           <motion.a
-//             href="[github.com/iron568](https://github.com/iron568)"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="social-icon w-12 h-12 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 backdrop-blur-sm rounded-xl flex items-center justify-center border border-gray-500/30 transition-all duration-300"
-//             style={{ backgroundColor: "#161B22" }}
-//             whileHover={{
-//               scale: 1.2,
-//               y: -5,
-//               boxShadow: "0 10px 25px rgba(22,27,34,0.6)",
-//             }}
-//             whileTap={{ scale: 0.95 }}
-//           >
-//             <FaGithub className="text-xl text-white" />
-//           </motion.a>
-//         </div>
-//       </motion.div>
-
-//       <SmartBackButton />
-//     </div>
-//   );
-// }
-
-import SmartBackButton from "../components/SmartBackButton";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -193,6 +10,7 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import axios from "axios";
+import emailjs from "@emailjs/browser"; // EmailJS import
 import AnimatedBackground from "../components/AnimatedBackground";
 
 export default function Contact() {
@@ -209,18 +27,34 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
+      // 1. Local Database mein save karein
       const response = await axios.post(
-        "https://shakti-sahu-portfolio.onrender.com/api/contact", // Path (/api/contact) add kar diya hai
+        "https://shakti-sahu-portfolio.onrender.com/api/contact",
         formData,
       );
-      if (response.status === 201 || response.data.success) {
-        // Status 201 check karna safer hai
+
+      if (response.data.success) {
+        // 2. EmailJS se real-time alert bhein
+        const templateParams = {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        };
+
+        await emailjs.send(
+          "service_8dyksd2", // Notepad se apni Service ID yahan dalo
+          "template_3fngmop", // Notepad se apni Template ID yahan dalo
+          templateParams,
+          "PNKlzJeehaL73Y7Xn", // Notepad se apni Public Key yahan dalo
+        );
+
         setStatus("success");
         setFormData({ name: "", email: "", phone: "", message: "" });
         setTimeout(() => setStatus(""), 3000);
       }
     } catch (error) {
-      console.error("Submission Error:", error); // Error check karne ke liye console log
+      console.error("Submission Error:", error);
       setStatus("error");
       setTimeout(() => setStatus(""), 3000);
     }
@@ -231,7 +65,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="section-container relative min-h-screen bg-[#030712] text-white py-20 px-4 overflow-hidden">
+    <div className="section-container relative min-h-screen bg-[#030712] text-white py-20 px-4 overflow-hidden font-sans">
       <AnimatedBackground />
 
       {/* --- BACK NAVIGATION --- */}
@@ -253,13 +87,14 @@ export default function Contact() {
       >
         {/* LEFT: TEXT CONTENT */}
         <div className="space-y-8">
-          <h1 className="text-6xl md:text-7xl font-black tracking-tighter">
+          <h1 className="text-6xl md:text-7xl font-black tracking-tighter uppercase">
             LET'S <span className="text-cyan-500">TALK.</span>
           </h1>
           <p className="text-xl text-gray-400 leading-relaxed font-medium">
             Have a project in mind or just want to say hi? I'm always open to
             discussing new opportunities and{" "}
-            <span className="text-white">ITEP 2026</span> collaborations.
+            <span className="text-white font-bold">ITEP 2026</span>{" "}
+            collaborations.
           </p>
 
           {/* SOCIAL DOCK */}
@@ -268,35 +103,23 @@ export default function Contact() {
               {
                 icon: FaFacebook,
                 link: "https://www.facebook.com/shakti.sahu.581730",
-                color: "#1877F2",
               },
               {
                 icon: FaInstagram,
                 link: "https://www.instagram.com/shakti.sahu.581730/",
-                color: "#E4405F",
               },
               {
                 icon: FaLinkedin,
                 link: "https://www.linkedin.com/in/shakti-sahu-507321374/",
-                color: "#0A66C2",
               },
-              {
-                icon: FaGithub,
-                link: "https://github.com/iron568",
-                color: "#FFFFFF",
-              },
+              { icon: FaGithub, link: "https://github.com/iron568" },
             ].map((social, i) => (
               <motion.a
                 key={i}
                 href={social.link}
                 target="_blank"
-                className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-2xl transition-all hover:border-white/40"
-                whileHover={{
-                  y: -18,
-                  scale: 1.2,
-                  backgroundColor: `${social.color}50`,
-                  color: social.color,
-                }}
+                className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-2xl transition-all hover:border-cyan-500/50 hover:text-cyan-500"
+                whileHover={{ y: -10, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <social.icon />
@@ -307,58 +130,49 @@ export default function Contact() {
 
         {/* RIGHT: CONTACT FORM */}
         <motion.div
-          className="bg-white/5 backdrop-blur-2xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl shadow-cyan-500/5"
-          initial={{ opacity: 0, scale: 0.9 }}
+          className="bg-[#0f172a]/40 backdrop-blur-2xl border border-white/5 p-10 rounded-[2.5rem] shadow-2xl"
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="group relative">
-              <input
-                type="text"
-                name="name"
-                placeholder="YOUR NAME"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-white/20"
-                required
-              />
-            </div>
+            <input
+              type="text"
+              name="name"
+              placeholder="YOUR NAME"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-gray-600"
+              required
+            />
 
-            <div className="group relative">
-              <input
-                type="email"
-                name="email"
-                placeholder="YOUR EMAIL"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-white/20"
-                required
-              />
-            </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="YOUR EMAIL"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-gray-600"
+              required
+            />
 
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="YOUR MOBILE NUMBER"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none  focus:border-cyan-500 transition-all placeholder:text-white/20"
-              />
-            </div>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="YOUR MOBILE NUMBER"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent border-b border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-gray-600"
+            />
 
-            <div className="group relative">
-              <textarea
-                name="message"
-                placeholder="HOW CAN I HELP?"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full bg-transparent border-b-2 border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-white/20 min-h-[120px] resize-none"
-                required
-              />
-            </div>
+            <textarea
+              name="message"
+              placeholder="HOW CAN I HELP?"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-white/10 py-3 text-white font-bold tracking-widest focus:outline-none focus:border-cyan-500 transition-all placeholder:text-gray-600 min-h-[100px] resize-none"
+              required
+            />
 
             <motion.button
               type="submit"
@@ -371,19 +185,15 @@ export default function Contact() {
                     : "bg-cyan-500 text-black hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]"
               }`}
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
             >
-              {status === "sending" ? (
-                "TRANSMITTING..."
-              ) : status === "success" ? (
-                "TRANSMITTED ✅"
-              ) : status === "error" ? (
-                "ERROR ❌"
-              ) : (
-                <>
-                  SEND MESSAGE <FaPaperPlane className="text-sm" />
-                </>
-              )}
+              {status === "sending"
+                ? "TRANSMITTING..."
+                : status === "success"
+                  ? "TRANSMITTED ✅"
+                  : status === "error"
+                    ? "ERROR ❌"
+                    : "SEND MESSAGE"}
+              <FaPaperPlane className="text-sm" />
             </motion.button>
           </form>
         </motion.div>
