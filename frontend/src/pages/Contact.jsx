@@ -43,7 +43,7 @@ export default function Contact() {
         };
 
         await emailjs.send(
-          "service_8dyksd2", // Notepad se apni Service ID yahan dalo
+          "service_reznmed", // Notepad se apni Service ID yahan dalo
           "template_3fngmop", // Notepad se apni Template ID yahan dalo
           templateParams,
           "PNKlzJeehaL73Y7Xn", // Notepad se apni Public Key yahan dalo
