@@ -79,16 +79,16 @@ export default function Admin() {
   };
 
   const permanentDelete = async (id) => {
-    if (
-      window.confirm("CRITICAL: Permanently erase this record from database?")
-    ) {
+    if (window.confirm("Are you sure you want to delete this permanently?")) {
       try {
-        await axios.delete(
-          `https://shakti-sahu-portfolio.onrender.com/api/contact/${id}`,
-        );
-        setTrash(trash.filter((c) => c._id !== id));
+        const response = await API.delete(`/contact/${id}`);
+        if (response.data.success) {
+          setTrash(trash.filter((c) => c._id !== id));
+          alert("Deleted from database!");
+        }
       } catch (error) {
-        alert("Error in database protocol");
+        console.error("Delete Error:", error);
+        alert("Failed to delete from server");
       }
     }
   };
@@ -138,11 +138,9 @@ export default function Admin() {
 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-            className="px-6 py-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl hover:bg-red-500 hover:text-white transition-all font-bold flex items-center gap-2"
+            whileTap={{ scale: 0.95 }}
+            onClick={logout}
+            className="px-6 py-3 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-2 hover:bg-red-500 hover:text-white transition-all text-sm font-bold tracking-widest text-red-500"
           >
             <FaSignOutAlt /> LOGOUT
           </motion.button>

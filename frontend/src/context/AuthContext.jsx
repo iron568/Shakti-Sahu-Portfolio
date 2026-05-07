@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -9,12 +9,16 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Check if user was already logged in from localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("adminLoggedIn") === "true";
+  });
 
   const login = (email, password) => {
-    // Email: admin@shakti.com | Password: shakti123
+    // Email: thanos568@gmail.com | Password: ironman928
     if (email === "thanos568@gmail.com" && password === "ironman928") {
       setIsLoggedIn(true);
+      localStorage.setItem("adminLoggedIn", "true"); // Save session
       return true;
     }
     return false;
@@ -22,6 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem("adminLoggedIn"); // Clear session
   };
 
   return (

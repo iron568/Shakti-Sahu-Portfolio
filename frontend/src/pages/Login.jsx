@@ -37,16 +37,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!validateForm()) {
-      setLoading(false);
-      return;
+    if (validateForm()) {
+      const success = login(formData.email, formData.password);
+      if (success) {
+        navigate("/admin"); // Redirect to admin panel
+      }
     }
-
-    const success = login(formData.email, formData.password);
-    setTimeout(() => {
-      setLoading(false);
-      if (success) navigate("/admin");
-    }, 1500);
+    setLoading(false);
   };
 
   const handleChange = (e) => {
