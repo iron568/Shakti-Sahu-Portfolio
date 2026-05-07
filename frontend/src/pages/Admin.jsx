@@ -43,12 +43,13 @@ export default function Admin() {
 
       if (response.data && Array.isArray(response.data.data)) {
         const allData = response.data.data;
-        // status "new" ya "replied" wale active mein
+
+        // Fix: Agar status nahi hai toh use 'active' maano
         setContacts(allData.filter((c) => c.status !== "read"));
-        // status "read" wale trash mein
         setTrash(allData.filter((c) => c.status === "read"));
       } else {
         setContacts([]);
+        setTrash([]);
       }
     } catch (error) {
       console.error("Error fetching contacts:", error);

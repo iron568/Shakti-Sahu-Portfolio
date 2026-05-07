@@ -78,7 +78,7 @@ router.delete("/:id", async (req, res) => {
 // 5. PATCH - Update status (Trash/Restore)
 router.patch("/:id/status", async (req, res) => {
   try {
-    const { status } = req.body; // Status "read" ya "replied" ke bajaye hum "trash" use kar sakte hain
+    const { status } = req.body;
     const updatedContact = await Contact.findByIdAndUpdate(
       req.params.id,
       { status },
@@ -88,6 +88,6 @@ router.patch("/:id/status", async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-});
+}); // Ye bracket aur semicolon dhyan se check karna
 
 export default router;
