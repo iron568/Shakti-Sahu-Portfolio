@@ -17,6 +17,7 @@ app.use(
     origin: [
       "https://shakti-sahu-portfolio.vercel.app",
       "http://localhost:3000",
+      "http://localhost:5173", // Vite ka default port agar 3000 nahi hai toh
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,

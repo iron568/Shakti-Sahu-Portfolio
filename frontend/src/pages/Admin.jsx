@@ -14,7 +14,7 @@ import {
   FaMobileAlt,
   FaDesktop,
 } from "react-icons/fa";
-import axios from "axios";
+import API from "../api";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 export default function Admin() {
@@ -39,9 +39,7 @@ export default function Admin() {
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        "https://shakti-sahu-portfolio.onrender.com/api/contact",
-      );
+      const response = await API.get("/contact");
 
       const data = Array.isArray(response.data)
         ? response.data
@@ -56,14 +54,15 @@ export default function Admin() {
 
   const fetchAnalytics = async () => {
     try {
-      const response = await axios.get(
-        "https://shakti-sahu-portfolio.onrender.com/api/contact/analytics",
-      );
+      const response = await API.get("/contact/analytics");
       if (response.data.success) {
-        setStats(response.data);
+        setStats({
+          totalVisitors: response.data.totalVisitors,
+          deviceStats: response.data.deviceStats,
+        });
       }
     } catch (error) {
-      console.error("Error fetching analytics:", error);
+      console.error("Analytics Error:", error);
     }
   };
 
