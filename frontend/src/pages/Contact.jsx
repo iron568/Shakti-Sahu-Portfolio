@@ -9,7 +9,7 @@ import {
   FaPaperPlane,
   FaArrowLeft,
 } from "react-icons/fa";
-import axios from "axios";
+import API from "../api";
 import emailjs from "@emailjs/browser"; // EmailJS import
 import AnimatedBackground from "../components/AnimatedBackground";
 
@@ -28,10 +28,7 @@ export default function Contact() {
     setStatus("sending");
     try {
       // 1. Local Database mein save karein
-      const response = await axios.post(
-        "https://shakti-sahu-portfolio.onrender.com/api/contact",
-        formData,
-      );
+      const response = await API.post("/contact", formData);
 
       if (response.data.success) {
         // 2. EmailJS se real-time alert bhein

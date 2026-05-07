@@ -41,14 +41,16 @@ export default function Admin() {
       setLoading(true);
       const response = await API.get("/contact");
 
-      const data = Array.isArray(response.data)
-        ? response.data
-        : response.data.data || [];
-      setContacts(data);
+      if (response.data && Array.isArray(response.data.data)) {
+        setContacts(response.data.data);
+      } else {
+        setContacts([]);
+      }
     } catch (error) {
       console.error("Error fetching contacts:", error);
+      setContacts([]);
     } finally {
-      setTimeout(() => setLoading(false), 800);
+      setLoading(false);
     }
   };
 

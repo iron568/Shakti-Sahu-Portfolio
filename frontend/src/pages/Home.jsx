@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import API from "../api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
@@ -26,12 +27,9 @@ export default function Home() {
         try {
           // Local testing ke liye: http://localhost:5001/api/track
           // Live ke liye niche wali link use karein
-          await axios.get(
-            "https://shakti-sahu-portfolio.onrender.com/api/track",
-            {
-              headers: { "x-new-session": "true" },
-            },
-          );
+          await API.get("/track", {
+            headers: { "x-new-session": "true" },
+          });
           sessionStorage.setItem("portfolio_session_v2", "true");
         } catch (err) {
           console.log("Tracking sync...");
