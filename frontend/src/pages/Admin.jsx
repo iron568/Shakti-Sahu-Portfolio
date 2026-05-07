@@ -42,7 +42,11 @@ export default function Admin() {
       const response = await API.get("/contact");
 
       if (response.data && Array.isArray(response.data.data)) {
-        setContacts(response.data.data);
+        const allData = response.data.data;
+        // status "new" ya "replied" wale active mein
+        setContacts(allData.filter((c) => c.status !== "read"));
+        // status "read" wale trash mein
+        setTrash(allData.filter((c) => c.status === "read"));
       } else {
         setContacts([]);
       }
@@ -68,14 +72,35 @@ export default function Admin() {
     }
   };
 
-  const moveToTrash = (contact) => {
-    setTrash([...trash, contact]);
-    setContacts(contacts.filter((c) => c._id !== contact._id));
+  const moveToTrash = async (contact) => {
+    try {
+      // Backend status update
+      const response = await API.patch(`/contact/${contact._id}/status`, {
+        status: "read",
+      }); // "read" ko hum trash ki tarah treat kar rahe hain
+
+      if (response.data.success) {
+        setTrash([...trash, contact]);
+        setContacts(contacts.filter((c) => c._id !== contact._id));
+      }
+    } catch (error) {
+      console.error("Trash Error:", error);
+    }
   };
 
-  const restoreFromTrash = (contact) => {
-    setContacts([...contacts, contact]);
-    setTrash(trash.filter((c) => c._id !== contact._id));
+  const restoreFromTrash = async (contact) => {
+    try {
+      const response = await API.patch(`/contact/${contact._id}/status`, {
+        status: "new",
+      });
+
+      if (response.data.success) {
+        setContacts([...contacts, contact]);
+        setTrash(trash.filter((c) => c._id !== contact._id));
+      }
+    } catch (error) {
+      console.error("Restore Error:", error);
+    }
   };
 
   const permanentDelete = async (id) => {

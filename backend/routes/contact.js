@@ -75,4 +75,19 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// 5. PATCH - Update status (Trash/Restore)
+router.patch("/:id/status", async (req, res) => {
+  try {
+    const { status } = req.body; // Status "read" ya "replied" ke bajaye hum "trash" use kar sakte hain
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true },
+    );
+    res.json({ success: true, data: updatedContact });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 export default router;
