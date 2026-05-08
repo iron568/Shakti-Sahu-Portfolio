@@ -75,10 +75,10 @@ export default function Admin() {
 
   const moveToTrash = async (contact) => {
     try {
-      // Backend status update
+      // Path ko server.js ke route se match karte huye simple rakhein
       const response = await API.patch(`/contact/${contact._id}/status`, {
         status: "read",
-      }); // "read" ko hum trash ki tarah treat kar rahe hain
+      });
 
       if (response.data.success) {
         setTrash([...trash, contact]);

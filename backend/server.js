@@ -19,7 +19,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:5173", // Vite ka default port agar 3000 nahi hai toh
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   }),
 );

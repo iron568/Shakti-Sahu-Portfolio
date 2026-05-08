@@ -11,7 +11,6 @@ import {
   FaLinkedin,
   FaInstagram,
 } from "react-icons/fa";
-import axios from "axios";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 export default function Home() {
