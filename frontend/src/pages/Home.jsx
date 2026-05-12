@@ -164,10 +164,10 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-8 mt-12 px-4 w-full">
           <motion.a
-            href="/resume-shakti.pdf"
+            href="/Shakti-Sahu-resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            download="Shakti-Sahu-Resume.pdf"
+            download="Shakti-Sahu-resume.pdf"
             whileHover={{ y: -5, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-full sm:w-auto px-8 md:px-10 py-4 bg-cyan-500 text-black font-black text-lg md:text-xl rounded-2xl md:rounded-full shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-cyan-500/60 transition-all flex items-center justify-center gap-3 active:bg-white"
